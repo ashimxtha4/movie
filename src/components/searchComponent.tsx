@@ -19,8 +19,7 @@ export default function Search() {
   }
   return (
     <>
-      <div className="banner border w-full">Banner</div>
-      <form onSubmit={searchContent}>
+      <form onSubmit={searchContent} className="">
         <input
           className="border border-black rounded-lg p-2"
           placeholder="Search..."
@@ -29,6 +28,8 @@ export default function Search() {
         />
         <button type="submit">Search</button>
       </form>
+      <div className="banner border w-full h-screen">Banner</div>
+
     </>
   );
 }
