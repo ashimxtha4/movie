@@ -1,13 +1,23 @@
 "use client";
 
+import { useApiClient } from "@/utils/api.util";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState,useEffect} from "react";
 
 export default function Search() {
   const router = useRouter();
   const [query, setQuery] = useState("");
+  const api = useApiClient()
+  useEffect(()=>{
+    api.get('search/movie',{params:{
+      query:'a'
+    }}).then((res) => {
+      console.log("🚀 ~ api.get ~ res:", res)
+    })
+  },[])
+
   async function searchContent(e: any) {
     e.preventDefault();
     console.log(query);

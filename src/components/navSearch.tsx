@@ -2,21 +2,22 @@
 
 import axios from "axios";
 import Image from "next/image";
-import { useRouter, usePathname, useParams } from "next/navigation";
+import { useRouter, usePathname, useParams, useSearchParams } from "next/navigation";
+import {} from "next/navigation";
+
 import { useState } from "react";
 
 export default function NavSearch() {
   const router = useRouter();
   const path = usePathname();
-  console.log("🚀 ~ NavSearch ~ path:", path)
-  const param = useParams();
-  console.log("🚀 ~ NavSearch ~ param:", param)
-  console.log("🚀 ~ Search ~ router:", router);
+  console.log("🚀 ~ NavSearch ~ path:", path);
+  const param = useSearchParams();
+  console.log("🚀 ~ NavSearch ~ param:", Object.fromEntries(param.entries()));
   const [query, setQuery] = useState("");
   async function searchContent(e: any) {
     e.preventDefault();
     console.log(query);
-    router.push("?query=" + query);
+    router.push("/movie?query=" + query);
     // let res = await axios.get(
     //   "https://api.themoviedb.org/3/search/movie?api_key=4f74382d3b16155e628a825d47eeb80d&query=" + query
     // );

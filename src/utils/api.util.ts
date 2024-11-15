@@ -5,11 +5,12 @@ import notification from "./notification.util";
 import { signOut } from "@/store/slicers/auth.slicer";
 
 export const useApiClient = () => {
-  const token = useAppSelector((state: any) => state.auth.token);
+  const token = process.env.NEXT_PUBLIC_API_KEY;
   const headers = token ? { Authorization: `Bearer ${token}` } : {};
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const instance = axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
+    baseURL: `${process.env.NEXT_PUBLIC_API_URL}/`,
+    params: { api_key: process.env.NEXT_PUBLIC_API_KEY },
     headers,
   });
 
@@ -20,7 +21,7 @@ export const useApiClient = () => {
       if (message) notification.error(message);
       if (error.response?.status == 401) {
         notification.error(error.response?.data?.message ?? "Unauthorized user log in again.");
-        dispatch(signOut());
+        // dispatch(signOut());
       }
       return Promise.reject(error);
     }
